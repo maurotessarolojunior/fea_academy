@@ -1,0 +1,156 @@
+version: 2
+
+sources:
+  - name: advworks
+    database: fea_academy
+    description: "Banco de dados transacional da Adventure Works"
+    schema: adventure_works
+    tables:
+      - name: sales_salesorderheader
+        description: "Cabeçalho dos pedidos de venda"
+        columns:
+          - name: SalesOrderID
+            description: "Chave primária - identificador único do pedido"
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesorderdetail
+        description: "Detalhes dos itens de pedido"
+        columns:
+          - name: SalesOrderDetailID
+            description: "Chave primária - identificador único do item"
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_customer
+        description: "Cadastro de clientes"
+        columns:
+          - name: CustomerID
+            description: "Chave primária - identificador único do cliente"
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesreason
+        description: "Motivos de venda"
+        columns:
+          - name: SalesReasonID
+            description: "Chave primária - identificador do motivo"
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesorderheadersalesreason
+        description: "Bridge entre pedidos e motivos"
+
+      - name: sales_creditcard
+        description: "Cartões de crédito"
+        columns:
+          - name: CreditCardID
+            description: "Chave primária - identificador do cartão"
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_store
+        description: "Lojas da Adventure Works"
+        columns:
+          - name: BusinessEntityID
+            description: "Chave primária - identificador da loja"
+            tests:
+              - unique
+              - not_null
+
+      - name: sales_salesperson
+        description: "Vendedores"
+        columns:
+          - name: BusinessEntityID
+            description: "Chave primária - identificador do vendedor"
+            tests:
+              - unique
+              - not_null
+
+      - name: person_person
+        description: "Dados pessoais"
+        columns:
+          - name: BusinessEntityID
+            description: "Chave primária - identificador único da pessoa"
+            tests:
+              - unique
+              - not_null
+
+      - name: person_address
+        description: "Endereços"
+        columns:
+          - name: AddressID
+            description: "Chave primária - identificador único do endereço"
+            tests:
+              - unique
+              - not_null
+
+      - name: person_stateprovince
+        description: "Estados e províncias"
+        columns:
+          - name: StateProvinceID
+            description: "Chave primária - identificador do estado/província"
+            tests:
+              - unique
+              - not_null
+
+      - name: person_countryregion
+        description: "Países"
+        columns:
+          - name: CountryRegionCode
+            description: "Chave primária - código do país"
+            tests:
+              - unique
+
+      - name: person_businessentityaddress
+        description: "Relacionamento entidade-endereço"
+
+      - name: production_product
+        description: "Produtos"
+        columns:
+          - name: ProductID
+            description: "Chave primária - identificador único do produto"
+            tests:
+              - unique
+              - not_null
+
+      - name: production_productsubcategory
+        description: "Subcategorias"
+        columns:
+          - name: ProductSubcategoryID
+            description: "Chave primária - identificador da subcategoria"
+            tests:
+              - unique
+              - not_null
+
+      - name: production_productcategory
+        description: "Categorias"
+        columns:
+          - name: ProductCategoryID
+            description: "Chave primária - identificador da categoria"
+            tests:
+              - unique
+              - not_null
+
+      - name: production_productmodel
+        description: "Modelos de produtos"
+        columns:
+          - name: ProductModelID
+            description: "Chave primária - identificador do modelo"
+            tests:
+              - unique
+              - not_null
+
+      - name: humanresources_employee
+        description: "Funcionários"
+        columns:
+          - name: BusinessEntityID
+            description: "Chave primária - identificador do funcionário"
+            tests:
+              - unique
+              - not_null
