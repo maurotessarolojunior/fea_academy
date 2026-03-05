@@ -10,22 +10,17 @@ final as (
         country_region_pk,
 
         -- Address
-        address_line1,
-        address_line2,
+        address_line_1,
+        address_line_2,
         city,
         postal_code,
 
         -- State/Province
-        state_province_code,
         state_province_name,
-        is_only_state_province_flag,
+        state_province_code,
 
         -- Country
-        country_region_code,
-        country_region_name,
-
-        -- Metadata
-        address_modified_date
+        country_name
 
     from locations
 )

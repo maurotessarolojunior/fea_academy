@@ -33,60 +33,54 @@ final as (
 
         -- Natural keys
         s.sales_order_detail_pk,
-        s.sales_order_header_pk,
+        s.sales_order_pk          as sales_order_header_pk,
 
-        -- Foreign keys (surrogate) para dimensões
+        -- Foreign keys (surrogate)
         c.customer_key,
         p.product_key,
         l.location_key,
         sp.salesperson_key,
         cc.credit_card_key,
-        d.date_key                  as order_date_key,
+        d.date_key                as order_date_key,
 
-        -- Foreign keys (natural) - backup
+        -- Foreign keys (natural)
         s.customer_fk,
         s.product_fk,
         s.ship_to_address_fk,
-        s.bill_to_address_fk,
         s.salesperson_fk,
         s.credit_card_fk,
+        s.territory_fk,
 
         -- Datas
         s.order_date,
         s.due_date,
         s.ship_date,
 
-        -- Métricas do item (grain: linha de pedido)
-        s.order_qty,
+        -- Métricas do item
+        s.order_quantity          as order_qty,
         s.unit_price,
         s.unit_price_discount,
         s.line_total,
 
-        -- Métricas do pedido (header - se duplicar, agrupe no dashboard)
-        s.sub_total,
-        s.tax_amt,
+        -- Métricas do pedido
+        s.subtotal,
+        s.tax_amount,
         s.freight,
         s.total_due,
 
         -- Atributos do pedido
         s.order_status,
-        s.online_order_flag,
-        s.purchase_order_number,
-        s.account_number,
-        s.ship_method,
-        s.currency_rate_fk,
+        s.is_online_order,
 
-        -- Metadados
-        s.order_modified_date
+        -- Metadata
+        s.last_updated_at
 
     from sales s
-
-    -- Joins para surrogate keys
-    left join customers c      on s.customer_fk       = c.customer_pk
-    left join products p       on s.product_fk        = p.product_pk
+    left join customers c      on s.customer_fk        = c.customer_pk
+    left join products p       on s.product_fk         = p.product_pk
     left join locations l      on s.ship_to_address_fk = l.address_pk
-    left join salespersons sp  on s.salesperson_fk    = sp.salesperson_pk
-    left join credit_cards cc  on s.credit_card_fk    = cc.credit_card_pk
+    left join salespersons sp  on s.salesperson_fk     = sp.salesperson_pk
+    left join credit_cards cc  on s.credit_card_fk     = cc.credit_card_pk
     left join dates d          on cast(s.order_date as date) = d.date_actual
 )
 

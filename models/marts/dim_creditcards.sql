@@ -10,7 +10,7 @@ final as (
         card_number,
         exp_month,
         exp_year,
-        credit_card_modified_date
+        last_updated_at
 
     from credit_cards
 )

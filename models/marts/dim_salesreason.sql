@@ -6,9 +6,9 @@ final as (
     select
         {{ dbt_utils.generate_surrogate_key(['sales_reason_pk']) }} as sales_reason_key,
         sales_reason_pk,
-        reason_name,
+        sales_reason_name,
         reason_type,
-        sales_reason_modified_date
+        last_updated_at
 
     from sales_reasons
 )

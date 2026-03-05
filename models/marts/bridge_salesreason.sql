@@ -8,11 +8,11 @@ sales_reasons as (
 
 final as (
     select
-        {{ dbt_utils.generate_surrogate_key(['o.sales_order_header_fk', 'o.sales_reason_fk']) }} as bridge_key,
-        o.sales_order_header_fk,
+        {{ dbt_utils.generate_surrogate_key(['o.sales_order_fk', 'o.sales_reason_fk']) }} as bridge_key,
+        o.sales_order_fk,
         sr.sales_reason_key,
         o.sales_reason_fk,
-        o.order_reason_modified_date
+        o.last_updated_at
 
     from order_reasons o
     left join sales_reasons sr on o.sales_reason_fk = sr.sales_reason_pk

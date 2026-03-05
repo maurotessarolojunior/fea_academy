@@ -6,33 +6,27 @@ final as (
     select
         {{ dbt_utils.generate_surrogate_key(['product_pk']) }} as product_key,
         product_pk,
-        category_pk,
-        subcategory_pk,
-        model_pk,
+        product_subcategory_pk,
+        product_category_pk,
+        product_model_pk,
 
         -- Product info
         product_name,
         product_number,
-        color,
-        size,
-        weight,
-        list_price,
+        product_color,
+        product_size,
+        product_weight,
         standard_cost,
-
-        -- Classification
-        category_name,
-        subcategory_name,
-        model_name,
+        list_price,
 
         -- Flags
-        is_make_flag,
-        is_finished_goods_flag,
-        product_sell_start_date,
-        product_sell_end_date,
-        product_discontinued_date,
+        is_manufactured,
+        is_finished_good,
 
-        -- Metadata
-        product_modified_date
+        -- Classification
+        subcategory_name,
+        category_name,
+        model_name
 
     from products
 )

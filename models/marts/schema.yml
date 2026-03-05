@@ -10,6 +10,7 @@ models:
           - unique
           - not_null
       - name: customer_pk
+        description: "Primary key natural do cliente."
         tests:
           - unique
           - not_null
@@ -18,10 +19,12 @@ models:
     description: "Dimensão de produtos com categoria, subcategoria e modelo."
     columns:
       - name: product_key
+        description: "Surrogate key gerada pelo dbt_utils."
         tests:
           - unique
           - not_null
       - name: product_pk
+        description: "Primary key natural do produto."
         tests:
           - unique
           - not_null
@@ -30,10 +33,12 @@ models:
     description: "Dimensão de localização: endereço, estado e país."
     columns:
       - name: location_key
+        description: "Surrogate key gerada pelo dbt_utils."
         tests:
           - unique
           - not_null
       - name: address_pk
+        description: "Primary key natural do endereço."
         tests:
           - unique
           - not_null
@@ -42,34 +47,40 @@ models:
     description: "Dimensão de vendedores com dados de funcionário e pessoa."
     columns:
       - name: salesperson_key
+        description: "Surrogate key gerada pelo dbt_utils."
         tests:
           - unique
           - not_null
       - name: salesperson_pk
+        description: "Primary key natural do vendedor."
         tests:
           - unique
           - not_null
 
-
+  - name: dim_salesreason
     description: "Dimensão de motivos de venda (ex: Promotion, Price, etc.)."
     columns:
       - name: sales_reason_key
+        description: "Surrogate key gerada pelo dbt_utils."
         tests:
           - unique
           - not_null
       - name: sales_reason_pk
+        description: "Primary key natural do motivo de venda."
         tests:
           - unique
           - not_null
 
-
+  - name: dim_creditcards
     description: "Dimensão de cartões de crédito usados nas compras."
     columns:
       - name: credit_card_key
+        description: "Surrogate key gerada pelo dbt_utils."
         tests:
           - unique
           - not_null
       - name: credit_card_pk
+        description: "Primary key natural do cartão."
         tests:
           - unique
           - not_null
@@ -78,10 +89,12 @@ models:
     description: "Dimensão de data com atributos de calendário (2005-2015)."
     columns:
       - name: date_key
+        description: "Surrogate key gerada pelo dbt_utils."
         tests:
           - unique
           - not_null
       - name: date_actual
+        description: "Data real no formato DATE."
         tests:
           - unique
           - not_null
@@ -90,24 +103,29 @@ models:
     description: "Fato de vendas com grain em nível de linha de pedido (sales_order_detail)."
     columns:
       - name: sales_key
+        description: "Surrogate key gerada pelo dbt_utils."
         tests:
           - unique
           - not_null
       - name: sales_order_detail_pk
+        description: "Primary key natural da linha de pedido."
         tests:
           - unique
           - not_null
       - name: order_qty
+        description: "Quantidade de itens no pedido."
         tests:
           - not_null
       - name: line_total
+        description: "Valor total da linha (unit_price * order_qty)."
         tests:
           - not_null
 
-
+  - name: bridge_salesreason
     description: "Bridge table para relacionamento N:N entre pedidos e motivos de venda."
     columns:
       - name: bridge_key
+        description: "Surrogate key gerada pelo dbt_utils."
         tests:
           - unique
           - not_null

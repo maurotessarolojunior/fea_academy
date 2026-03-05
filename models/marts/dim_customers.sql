@@ -13,16 +13,15 @@ final as (
         first_name,
         last_name,
         first_name || ' ' || last_name as full_name,
-        email_address,
-        phone,
         person_type,
 
         -- Store info
         store_name,
-        store_sales_person_fk,
 
-        -- Metadata
-        customer_modified_date
+        -- Address info
+        address_pk,
+        city,
+        postal_code
 
     from customers
 )
