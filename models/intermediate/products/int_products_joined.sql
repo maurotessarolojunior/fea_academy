@@ -1,0 +1,46 @@
+with
+    products as (
+        select *
+        from {{ ref('stg_advworks__products') }}
+    )
+
+    , product_subcategories as (
+        select *
+        from {{ ref('stg_advworks__product_subcategories') }}
+    )
+
+    , product_categories as (
+        select *
+        from {{ ref('stg_advworks__product_categories') }}
+    )
+
+    , product_models as (
+        select *
+        from {{ ref('stg_advworks__product_models') }}
+    )
+
+    , joined as (
+        select
+            products.product_pk
+            , products.product_name
+            , products.product_number
+            , products.product_color
+            , products.product_size
+            , products.product_weight
+            , products.is_manufactured
+            , products.is_finished_good
+            , products.standard_cost
+            , products.list_price
+            , product_subcategories.product_subcategory_pk
+            , product_subcategories.subcategory_name
+            , product_categories.product_category_pk
+            , product_categories.category_name
+            , product_models.product_model_pk
+            , product_models.model_name
+        from products
+        left join product_subcategories on products.product_subcategory_fk = product_subcategories.product_subcategory_pk
+        left join product_categories on product_subcategories.product_category_fk = product_categories.product_category_pk
+        left join product_models on products.product_model_fk = product_models.product_model_pk
+    )
+
+select * from joined
