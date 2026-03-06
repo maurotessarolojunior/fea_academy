@@ -57,9 +57,11 @@ final as (
         s.ship_date,
 
         -- Métricas do item
-        s.order_quantity          as order_qty,
+        s.order_qty,
         s.unit_price,
         s.unit_price_discount,
+        s.order_qty * s.unit_price                                as gross_sales,
+        s.order_qty * s.unit_price * (1 - s.unit_price_discount) as net_sales,
         s.line_total,
 
         -- Métricas do pedido

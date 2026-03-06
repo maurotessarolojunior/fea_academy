@@ -11,17 +11,17 @@ final as (
 
         -- Personal info
         first_name,
+        middle_name,
         last_name,
-        first_name || ' ' || last_name as full_name,
+        full_name,
         person_type,
 
         -- Store info
         store_name,
 
-        -- Address info
-        address_pk,
-        city,
-        postal_code
+        -- Customer classification
+        customer_name,
+        customer_type
 
     from customers
 )

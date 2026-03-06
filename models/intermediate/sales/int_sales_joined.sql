@@ -14,7 +14,7 @@ with
             order_items.sales_order_detail_pk
             , order_items.product_fk
             , order_items.special_offer_fk
-            , order_items.order_quantity
+            , order_items.order_quantity     as order_qty
             , order_items.unit_price
             , order_items.unit_price_discount
             , order_items.line_total

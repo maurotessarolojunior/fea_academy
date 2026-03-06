@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: int_customers_joined
+    description: "Intermediate model joining customers, persons and stores. Grain: one row per customer_pk. Individual customers have person info; Reseller customers have store info."
+    columns:
+      - name: customer_pk
+        description: "Primary key. One row per customer."
+        tests:
+          - unique
+          - not_null
+
+      - name: person_pk
+        description: "FK to persons staging. Nullable for Reseller customers."
+
+      - name: first_name
+        description: "Customer first name. Nullable for Reseller customers."
+
+      - name: middle_name
+        description: "Customer middle name. Nullable."
+
+      - name: last_name
+        description: "Customer last name. Nullable for Reseller customers."
+
+      - name: full_name
+        description: "Full name concatenated: first + middle (if exists) + last. Nullable for Reseller customers."
+
+      - name: person_type
+        description: "Type of person from source system. Nullable for Reseller customers."
+
+      - name: store_pk
+        description: "FK to stores staging. Nullable for Individual customers."
+
+      - name: store_name
+        description: "Store name. Nullable for Individual customers."
+
+      - name: customer_name
+        description: "Display name: store name for Resellers, full name for Individuals."
+        tests:
+          - not_null
+
+      - name: customer_type
+        description: "Customer type: 'Reseller' if linked to a store, 'Individual' otherwise."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Reseller', 'Individual']

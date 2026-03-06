@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: int_products_joined
+    description: "Intermediate model joining products with subcategories, categories and models. Grain: one row per product_pk. Products without category/subcategory are filled with 'Uncategorized'."
+    columns:
+      - name: product_pk
+        description: "Primary key. One row per product."
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        description: "Product name."
+        tests:
+          - not_null
+
+      - name: product_number
+        description: "Product number code."
+        tests:
+          - not_null
+
+      - name: product_color
+        description: "Product color. Nullable."
+
+      - name: product_size
+        description: "Product size. Nullable."
+
+      - name: product_weight
+        description: "Product weight. Nullable."
+
+      - name: is_manufactured
+        description: "Flag indicating if the product is manufactured in-house."
+        tests:
+          - not_null
+
+      - name: is_finished_good
+        description: "Flag indicating if the product is a finished good."
+        tests:
+          - not_null
+
+      - name: standard_cost
+        description: "Standard manufacturing cost."
+        tests:
+          - not_null
+
+      - name: list_price
+        description: "Product list price."
+        tests:
+          - not_null
+
+      - name: product_subcategory_pk
+        description: "FK to subcategory. -1 for products without subcategory."
+        tests:
+          - not_null
+
+      - name: subcategory_name
+        description: "Subcategory name. 'Uncategorized' for products without subcategory."
+        tests:
+          - not_null
+
+      - name: product_category_pk
+        description: "FK to category. -1 for products without category."
+        tests:
+          - not_null
+
+      - name: category_name
+        description: "Category name. 'Uncategorized' for products without category."
+        tests:
+          - not_null
+
+      - name: product_model_pk
+        description: "FK to product model. Nullable."
+
+      - name: model_name
+        description: "Model name. 'No Model' for products without a model."
+        tests:
+          - not_null

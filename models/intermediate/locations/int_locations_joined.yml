@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: int_locations_joined
+    description: "Intermediate model joining addresses, state provinces and country regions. Grain: one row per address_pk."
+    columns:
+      - name: address_pk
+        description: "Primary key. One row per address."
+        tests:
+          - unique
+          - not_null
+
+      - name: address_line_1
+        description: "Primary address line."
+        tests:
+          - not_null
+
+      - name: address_line_2
+        description: "Secondary address line. Nullable."
+
+      - name: city
+        description: "City name."
+        tests:
+          - not_null
+
+      - name: postal_code
+        description: "Postal/ZIP code."
+        tests:
+          - not_null
+
+      - name: spatial_location
+        description: "Spatial location data. Nullable."
+
+      - name: state_province_pk
+        description: "FK to state provinces. Nullable."
+
+      - name: state_province_name
+        description: "State or province name. Nullable."
+
+      - name: state_province_code
+        description: "State or province code. Nullable."
+
+      - name: country_region_pk
+        description: "FK to country regions. Nullable."
+
+      - name: country_name
+        description: "Country name. Nullable (known issue: Namibia has no country code)."

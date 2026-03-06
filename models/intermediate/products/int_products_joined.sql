@@ -31,12 +31,12 @@ with
             , products.is_finished_good
             , products.standard_cost
             , products.list_price
-            , product_subcategories.product_subcategory_pk
-            , product_subcategories.subcategory_name
-            , product_categories.product_category_pk
-            , product_categories.category_name
+            , coalesce(product_subcategories.product_subcategory_pk, -1)        as product_subcategory_pk
+            , coalesce(product_subcategories.subcategory_name, 'Uncategorized') as subcategory_name
+            , coalesce(product_categories.product_category_pk, -1)             as product_category_pk
+            , coalesce(product_categories.category_name, 'Uncategorized')      as category_name
             , product_models.product_model_pk
-            , product_models.model_name
+            , coalesce(product_models.model_name, 'No Model')                  as model_name
         from products
         left join product_subcategories on products.product_subcategory_fk = product_subcategories.product_subcategory_pk
         left join product_categories on product_subcategories.product_category_fk = product_categories.product_category_pk
