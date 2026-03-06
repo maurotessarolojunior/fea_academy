@@ -14,6 +14,16 @@ models:
         tests:
           - unique
           - not_null
+      - name: customer_name
+        description: "Nome de exibição: nome da loja para Resellers, nome completo para Individuals."
+        tests:
+          - not_null
+      - name: customer_type
+        description: "Tipo de cliente: 'Reseller' ou 'Individual'."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Reseller', 'Individual']
 
   - name: dim_products
     description: "Dimensão de produtos com categoria, subcategoria e modelo."
@@ -27,6 +37,18 @@ models:
         description: "Primary key natural do produto."
         tests:
           - unique
+          - not_null
+      - name: product_name
+        description: "Nome do produto."
+        tests:
+          - not_null
+      - name: category_name
+        description: "Nome da categoria. 'Uncategorized' para produtos sem categoria."
+        tests:
+          - not_null
+      - name: subcategory_name
+        description: "Nome da subcategoria. 'Uncategorized' para produtos sem subcategoria."
+        tests:
           - not_null
 
   - name: dim_locations
@@ -42,6 +64,10 @@ models:
         tests:
           - unique
           - not_null
+      - name: city
+        description: "Cidade."
+        tests:
+          - not_null
 
   - name: dim_salesperson
     description: "Dimensão de vendedores com dados de funcionário e pessoa."
@@ -55,6 +81,10 @@ models:
         description: "Primary key natural do vendedor."
         tests:
           - unique
+          - not_null
+      - name: full_name
+        description: "Nome completo do vendedor."
+        tests:
           - not_null
 
   - name: dim_salesreason
@@ -70,6 +100,10 @@ models:
         tests:
           - unique
           - not_null
+      - name: sales_reason_name
+        description: "Nome do motivo de venda."
+        tests:
+          - not_null
 
   - name: dim_creditcards
     description: "Dimensão de cartões de crédito usados nas compras."
@@ -83,6 +117,10 @@ models:
         description: "Primary key natural do cartão."
         tests:
           - unique
+          - not_null
+      - name: card_type
+        description: "Tipo do cartão (ex: Visa, MasterCard)."
+        tests:
           - not_null
 
   - name: dim_date
@@ -116,8 +154,28 @@ models:
         description: "Quantidade de itens no pedido."
         tests:
           - not_null
+      - name: unit_price
+        description: "Preço unitário no momento da venda."
+        tests:
+          - not_null
+      - name: unit_price_discount
+        description: "Desconto aplicado ao preço unitário."
+        tests:
+          - not_null
+      - name: gross_sales
+        description: "Vendas brutas: order_qty * unit_price (sem desconto)."
+        tests:
+          - not_null
+      - name: net_sales
+        description: "Vendas líquidas: order_qty * unit_price * (1 - unit_price_discount)."
+        tests:
+          - not_null
       - name: line_total
-        description: "Valor total da linha (unit_price * order_qty)."
+        description: "Valor total da linha vindo da fonte."
+        tests:
+          - not_null
+      - name: order_date
+        description: "Data do pedido."
         tests:
           - not_null
 
